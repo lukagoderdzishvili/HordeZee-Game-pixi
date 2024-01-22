@@ -35,6 +35,14 @@ export default class Zoombie{
         this.zoombie.position.set(this.zoombie.position.x + v.x, this.zoombie.position.y + s.y);
     }
     
+    kill(){
+        this.app.stage.removeChild(this.zoombie);
+    }
+
+    get position(){
+        return this.zoombie.position;
+    }
+
     randomSpawnPoint(){
         let edge = Math.floor(Math.random() * 4); //random int between 0 and 3
         let spawnPoint = new Victor(0, 0);
