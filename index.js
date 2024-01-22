@@ -13,19 +13,24 @@ const app = new PIXI.Application({
 });
 
 let player = new Player({ app });
-let zSpawner = new Spawner({ create: () => new Zoombie({ app, player}) });
-// let zoombie = new Zoombie({ app, player });
+let zSpawner = new Spawner({app: app, create: () => new Zoombie({ app, player}) });
 
-
+let gameStartScene = createScene("Click to Start");
+let gameOverScene = createScene("Game Over");
+app.gameStarted = false;
 
 app.ticker.add((delta) => {
-    player.update();
-    zSpawner.spawns.forEach((zoombie) => zoombie.update());
-    bulletHitTest({
-      bullets: player.shooting.bullets,
-      zoombies: zSpawner.spawns,
-      bulletRadius: 8,
-      zombieRadius: 16});
+  gameOverScene.visible = player.dead;
+  gameStartScene.visible = !app.gameStarted;
+  if(!app.gameStarted)return;
+  player.update();
+  zSpawner.spawns.forEach((zoombie) => zoombie.update());
+  bulletHitTest({
+    bullets: player.shooting.bullets,
+    zoombies: zSpawner.spawns,
+    bulletRadius: 8,
+    zombieRadius: 16
+  });
 });
 
 
@@ -42,3 +47,21 @@ function bulletHitTest({bullets, zoombies, bulletRadius, zombieRadius}){
     })
   })
 }
+
+function createScene(sceneText){
+  const sceneContainer = new PIXI.Container();
+  const text = new PIXI.Text(sceneText);
+  text.x = app.screen.width / 2;
+  text.y = 0;
+  text.anchor.set(0.5, 0);
+  sceneContainer.zIndex = 1;
+  sceneContainer.addChild(text);
+  app.stage.addChild(sceneContainer);
+  return sceneContainer;
+}
+
+function startGame(){
+  app.gameStarted = true;
+}
+
+document.addEventListener("click", startGame);
