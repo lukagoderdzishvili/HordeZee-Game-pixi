@@ -20,13 +20,18 @@ export default class Zoombie{
 
     }
 
+    attackPlayer(){
+        if(this.attacking) return;
+        this.attacking = true;
+        this.interval = setInterval(() => this.player.attack(), 500);
+    }
+
     update(){
         let e = new Victor(this.zoombie.position.x, this.zoombie.position.y);
         let s = new Victor(this.player.position.x, this.player.position.y);
 
         if(e.distance(s) < this.player.width / 2){
-            let r = this.randomSpawnPoint();
-            this.zoombie.position.set(r.x, r.y);
+            this.attackPlayer();
             return;
         }
 
@@ -37,6 +42,7 @@ export default class Zoombie{
     
     kill(){
         this.app.stage.removeChild(this.zoombie);
+        clearInterval(this.interval);
     }
 
     get position(){

@@ -56,7 +56,6 @@ export default class Player{
     }
 
     update(){
-        this.attack();
         const mouse =  this.app.renderer.plugins.interaction.mouse;
         const cursorPosition = mouse.global;
         let angle = 
