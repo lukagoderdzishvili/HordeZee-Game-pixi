@@ -44,6 +44,13 @@ app.ticker.add((delta) => {
 
     let e = new Victor(enemy.position.x, enemy.position.y);
     let s = new Victor(square.position.x, square.position.y);
+
+    if(e.distance(s) < squareWidth / 2){
+        let r = randomSpawnPoint();
+        enemy.position.set(r.x, r.y);
+        return;
+    }
+
     let d = s.subtract(e);
     let v = d.normalize().multiplyScalar(enemySpeed);
     enemy.position.set(enemy.position.x + v.x, enemy.position.y + s.y);
