@@ -1,8 +1,9 @@
 import * as PIXI from "pixi.js";
 import Player from "./player.js";
 import Zoombie from "./zoombie.js";
+import Spawner from "./spawner.js";
 
-const canvasSize = 256;
+const canvasSize = 516;
 const canvas = document.getElementById("mycanvas");
 const app = new PIXI.Application({
   view: canvas,
@@ -12,11 +13,12 @@ const app = new PIXI.Application({
 });
 
 let player = new Player({ app });
-let zoombie = new Zoombie({ app, player });
+let zSpawner = new Spawner({ create: () => new Zoombie({ app, player}) });
+// let zoombie = new Zoombie({ app, player });
 
 
 
 app.ticker.add((delta) => {
     player.update();
-    zoombie.update();
+    zSpawner.spawns.forEach((zoombie) => zoombie.update());
 });
