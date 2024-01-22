@@ -3,7 +3,7 @@ import Player from "./player.js";
 import Zoombie from "./zoombie.js";
 import Spawner from "./spawner.js";
 
-const canvasSize = 516;
+const canvasSize = Math.min(innerWidth, innerHeight);
 const canvas = document.getElementById("mycanvas");
 const app = new PIXI.Application({
   view: canvas,
