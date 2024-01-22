@@ -1,0 +1,21 @@
+{
+  "name": "hordezee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "snowpack dev --polyfill-node",
+    "build": "snowpack build --polyfill-node",
+    "init": "snowpack init"
+  },
+  "author": "Luka Goderdzishvili",
+  "license": "ISC",
+  "dependencies": {
+    "matter-js": "^0.15.0",
+    "pixi.js": "^5.3.7",
+    "victor": "^1.1.0"
+  },
+  "devDependencies": {
+    "snowpack": "^3.0.11"
+  }
+}
