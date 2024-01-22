@@ -23,8 +23,8 @@ app.ticker.add((delta) => {
   gameOverScene.visible = player.dead;
   gameStartScene.visible = !app.gameStarted;
   if(!app.gameStarted)return;
-  player.update();
-  zSpawner.spawns.forEach((zoombie) => zoombie.update());
+  player.update(delta);
+  zSpawner.spawns.forEach((zoombie) => zoombie.update(delta));
   bulletHitTest({
     bullets: player.shooting.bullets,
     zoombies: zSpawner.spawns,

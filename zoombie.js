@@ -26,7 +26,7 @@ export default class Zoombie{
         this.interval = setInterval(() => this.player.attack(), 500);
     }
 
-    update(){
+    update(delta){
         let e = new Victor(this.zoombie.position.x, this.zoombie.position.y);
         let s = new Victor(this.player.position.x, this.player.position.y);
 
@@ -36,7 +36,7 @@ export default class Zoombie{
         }
 
         let d = s.subtract(e);
-        let v = d.normalize().multiplyScalar(this.speed);
+        let v = d.normalize().multiplyScalar(this.speed * delta);
         this.zoombie.position.set(this.zoombie.position.x + v.x, this.zoombie.position.y + s.y);
     }
     
